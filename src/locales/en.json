@@ -1,0 +1,25 @@
+{
+  "app": {
+    "title": "IP Whitelist Checker 🇷🇺",
+    "elements": {
+      "input_placeholder": "IPv4 Address (e.g. 8.8.8.8)",
+      "button": "Check",
+      "load": "Fetching lists & checking..."
+    },
+    "result": {
+      "whitelisted": "Whitelisted!",
+      "not_whitelisted": "Not Whitelisted",
+      "reasons": {
+        "invalid": "Invalid IP address format.",
+        "ip": "Exact IP match in whitelist.",
+        "cidr": "Matched CIDR range: {{context}}",
+        "notfound": "IP is not in the whitelist."
+      }
+    },
+    "whois": {
+      "city_region": "City/Region",
+      "asn": "ASN",
+      "isp_org": "ISP / Organization"
+    }
+  }
+}
