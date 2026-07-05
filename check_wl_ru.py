@@ -1,6 +1,7 @@
 import urllib.request
 import ipaddress
 import sys
+import ipwhois
 
 IP_WHITELIST_URL = "https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/main/ipwhitelist.txt"
 CIDR_WHITELIST_URL = "https://raw.githubusercontent.com/hxehex/russia-mobile-internet-whitelist/main/cidrwhitelist.txt"
@@ -52,6 +53,22 @@ def main():
         print("Usage: python check_wl_ru.py <IP_ADDRESS>")
         print("Example: python check_wl_ru.py 8.8.8.8")
         sys.exit(1)
+
+    if len(sys.argv) > 2 and sys.argv[2] == "--whois":
+        ip = sys.argv[1]
+        obj = ipwhois.IPWhois(ip)
+        results = obj.lookup_rdap()
+        
+        asn = results.get('asn')
+        asn_country_code = results.get('asn_country_code')
+        network_name = results.get('network', {}).get('name')
+        country = results.get('network', {}).get('country')
+
+        print(f"IP: {ip}")
+        print(f"ASN: {asn}")
+        print(f"ASN Country Code: {asn_country_code}")
+        print(f"Owner: {network_name}")
+        print(f"Country by WHOIS: {country}")
 
     target_ip = sys.argv[1]
     exact_ips, cidrs = load_whitelists()
